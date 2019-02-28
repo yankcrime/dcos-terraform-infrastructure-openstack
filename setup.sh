@@ -57,7 +57,7 @@ EOF
    source ~centos/venvs/ansible/bin/activate
    pip install -U pip
    pip install ansible
-   git clone git@github.com:yankcrime/dcos-ansible.git ~centos/dcos-ansible
+   git clone -q git@github.com:yankcrime/dcos-ansible.git ~centos/dcos-ansible
    cd ~centos/dcos-ansible
    git checkout param_ip_detect
 

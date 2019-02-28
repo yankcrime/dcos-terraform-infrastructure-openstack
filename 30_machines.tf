@@ -13,19 +13,19 @@ resource "openstack_compute_instance_v2" "bootstrap" {
   }
 }
 
-resource "openstack_networking_floatingip_v2" "dcos_external_ip" {
+resource "openstack_networking_floatingip_v2" "bootstrap_external_ip" {
   pool       = "internet"
   depends_on = ["openstack_networking_router_interface_v2.dcos_router_int"]
 }
 
-resource "openstack_compute_floatingip_associate_v2" "dcos_external_ip" {
-  floating_ip = "${openstack_networking_floatingip_v2.dcos_external_ip.address}"
+resource "openstack_compute_floatingip_associate_v2" "bootstrap_external_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.bootstrap_external_ip.address}"
   instance_id = "${openstack_compute_instance_v2.bootstrap.id}"
 
   provisioner "file" {
     connection {
       type = "ssh"
-      host = "${openstack_networking_floatingip_v2.dcos_external_ip.address}"
+      host = "${openstack_networking_floatingip_v2.bootstrap_external_ip.address}"
       user = "centos"
     }
     source      = "${path.module}/setup.sh"
@@ -35,7 +35,7 @@ resource "openstack_compute_floatingip_associate_v2" "dcos_external_ip" {
   provisioner "remote-exec" {
     connection {
       type = "ssh"
-      host = "${openstack_networking_floatingip_v2.dcos_external_ip.address}"
+      host = "${openstack_networking_floatingip_v2.bootstrap_external_ip.address}"
       user = "centos"
     }
 
@@ -62,7 +62,7 @@ resource "openstack_compute_instance_v2" "master" {
       type         = "ssh"
       host         = "10.0.0.10${count.index}"
       user         = "centos"
-      bastion_host = "${openstack_networking_floatingip_v2.dcos_external_ip.address}"
+      bastion_host = "${openstack_networking_floatingip_v2.bootstrap_external_ip.address}"
       bastion_user = "centos"
     }
     
@@ -75,13 +75,22 @@ resource "openstack_compute_instance_v2" "master" {
       type         = "ssh"
       host         = "10.0.0.10${count.index}"
       user         = "centos"
-      bastion_host = "${openstack_networking_floatingip_v2.dcos_external_ip.address}"
+      bastion_host = "${openstack_networking_floatingip_v2.bootstrap_external_ip.address}"
       bastion_user = "centos"
     }
     
     inline = ["sudo sh /tmp/setup.sh > /tmp/setup.log"]
   }
+}
 
+resource "openstack_networking_floatingip_v2" "master_external_ip" {
+  pool       = "internet"
+  depends_on = ["openstack_networking_router_interface_v2.dcos_router_int"]
+}
+
+resource "openstack_compute_floatingip_associate_v2" "master_external_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.master_external_ip.address}"
+  instance_id = "${openstack_compute_instance_v2.master.id}"
 }
 
 resource "openstack_compute_instance_v2" "public0" {
@@ -102,7 +111,7 @@ resource "openstack_compute_instance_v2" "public0" {
       type         = "ssh"
       host         = "10.0.0.15${count.index}"
       user         = "centos"
-      bastion_host = "${openstack_networking_floatingip_v2.dcos_external_ip.address}"
+      bastion_host = "${openstack_networking_floatingip_v2.bootstrap_external_ip.address}"
       bastion_user = "centos"
     }
     
@@ -115,12 +124,22 @@ resource "openstack_compute_instance_v2" "public0" {
       type         = "ssh"
       host         = "10.0.0.15${count.index}"
       user         = "centos"
-      bastion_host = "${openstack_networking_floatingip_v2.dcos_external_ip.address}"
+      bastion_host = "${openstack_networking_floatingip_v2.bootstrap_external_ip.address}"
       bastion_user = "centos"
     }
     
     inline = ["sudo sh /tmp/setup.sh > /tmp/setup.log"]
   }
+}
+
+resource "openstack_networking_floatingip_v2" "public_agent_external_ip" {
+  pool       = "internet"
+  depends_on = ["openstack_networking_router_interface_v2.dcos_router_int"]
+}
+
+resource "openstack_compute_floatingip_associate_v2" "public_agent_external_ip" {
+  floating_ip = "${openstack_networking_floatingip_v2.public_agent_external_ip.address}"
+  instance_id = "${openstack_compute_instance_v2.public0.id}"
 }
 
 resource "openstack_compute_instance_v2" "private" {
@@ -141,7 +160,7 @@ resource "openstack_compute_instance_v2" "private" {
       type         = "ssh"
       host         = "10.0.0.20${count.index}"
       user         = "centos"
-      bastion_host = "${openstack_networking_floatingip_v2.dcos_external_ip.address}"
+      bastion_host = "${openstack_networking_floatingip_v2.bootstrap_external_ip.address}"
       bastion_user = "centos"
     }
     
@@ -154,7 +173,7 @@ resource "openstack_compute_instance_v2" "private" {
       type         = "ssh"
       host         = "10.0.0.20${count.index}"
       user         = "centos"
-      bastion_host = "${openstack_networking_floatingip_v2.dcos_external_ip.address}"
+      bastion_host = "${openstack_networking_floatingip_v2.bootstrap_external_ip.address}"
       bastion_user = "centos"
     }
     
