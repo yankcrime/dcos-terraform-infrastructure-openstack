@@ -60,7 +60,8 @@ EOF
    git clone git@github.com:yankcrime/dcos-ansible.git ~centos/dcos-ansible
    cd ~centos/dcos-ansible
    git checkout param_ip_detect
-   cat ~centos/dcos-ansible/inventory <<EOF
+
+   cat > ~centos/dcos-ansible/inventory <<EOF
 [bootstraps]
 bootstrap
 
@@ -101,7 +102,8 @@ masters
 agents
 agents_public
 EOF
-   cat ~centos/dcos-ansible/group_vars/all/dcos.yaml <<EOF
+
+   cat > ~centos/dcos-ansible/group_vars/all/dcos.yaml <<EOF
 ---
 dcos:
   download: "https://downloads.dcos.io/dcos/stable/1.12.2/dcos_generate_config.sh"
