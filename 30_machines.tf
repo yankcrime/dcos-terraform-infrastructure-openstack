@@ -44,7 +44,7 @@ resource "openstack_compute_floatingip_associate_v2" "bootstrap_external_ip" {
 }
 
 resource "openstack_compute_instance_v2" "master" {
-  count           = "1"
+  count           = "${var.number_of_masters}"
   name            = "master${count.index}"
   image_name      = "CentOS 7.6"
   flavor_name     = "cumberland"
