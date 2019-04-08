@@ -78,3 +78,32 @@ resource "openstack_networking_floatingip_v2" "public_agent_lb_flip" {
   pool    = "internet"
   port_id = "${openstack_lb_loadbalancer_v2.public_agent_lb.vip_port_id}"
 }
+
+# Internal LB
+resource "openstack_lb_loadbalancer_v2" "internal_lb" {
+  description   = "DC/OS Internal Services Loadbalancer"
+  vip_subnet_id = "${openstack_networking_subnet_v2.private_subnet.id}"
+}
+
+resource "openstack_lb_listener_v2" "internal_lb_listener" {
+  count           = "${length(var.internal_services)}"
+  protocol        = "TCP"
+  protocol_port   = "${element(var.internal_services, count.index)}"
+  loadbalancer_id = "${openstack_lb_loadbalancer_v2.internal_lb.id}"
+}
+
+resource "openstack_lb_pool_v2" "internal_lb_pool" {
+  count       = "${length(var.internal_services)}"
+  protocol    = "HTTP"
+  lb_method   = "ROUND_ROBIN"
+  listener_id = "${openstack_lb_listener_v2.internal_lb_listener.*.id[count.index]}"
+}
+
+resource "openstack_lb_member_v2" "internal_lb_members" {
+  count         = "${length(var.internal_services)}"
+  address       = "10.0.0.150"
+  protocol_port = "${element(var.internal_services, count.index)}"
+  pool_id       = "${openstack_lb_pool_v2.internal_lb_pool.*.id[count.index]}"
+  subnet_id     = "${openstack_networking_subnet_v2.private_subnet.id}"
+}
+
