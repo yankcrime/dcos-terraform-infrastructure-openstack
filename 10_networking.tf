@@ -94,7 +94,7 @@ resource "openstack_lb_listener_v2" "internal_lb_listener" {
 
 resource "openstack_lb_pool_v2" "internal_lb_pool" {
   count       = "${length(var.internal_services)}"
-  protocol    = "HTTP"
+  protocol    = "TCP"
   lb_method   = "ROUND_ROBIN"
   listener_id = "${openstack_lb_listener_v2.internal_lb_listener.*.id[count.index]}"
 }
