@@ -1,4 +1,4 @@
-variable "num_instances" {
+variable "num" {
   description = "How many instances should be created"
 }
 
@@ -47,4 +47,9 @@ variable "user_data" {
 variable "hostname_format" {
   description = "Format the hostname inputs are index+1, region, cluster_name"
   default     = "%[3]s-instance%[1]d-%[2]s"
+}
+
+variable "associate_public_ip_address" {
+  description = "Associate a public IP address with the instance"
+  default     = true
 }
