@@ -53,3 +53,8 @@ variable "associate_public_ip_address" {
   description = "Associate a public IP address with the instance"
   default     = true
 }
+
+variable "floating_ip_pool" {
+  description = "Subnet from which a floating IP address should be assigned"
+  default = ""
+}
