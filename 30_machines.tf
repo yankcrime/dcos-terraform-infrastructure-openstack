@@ -13,6 +13,8 @@ module "dcos-bootstrap-instance" {
   source = "./modules/bootstrap"
   network_id = "${openstack_networking_network_v2.private.id}"
   cluster_name = "testing"
+  associate_public_ip_address = true
+  floating_ip_pool = "internet"
 }
 
   

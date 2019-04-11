@@ -8,6 +8,8 @@ module "dcos-bootstrap-instance" {
   image_name      = "${var.image_name}"
   flavor_name     = "${var.flavor_name}"
   network_id      = "${var.network_id}"
+  associate_public_ip_address = "${var.associate_public_ip_address}"
+  floating_ip_pool = "${var.floating_ip_pool}"
 
 }
 
