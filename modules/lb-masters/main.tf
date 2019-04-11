@@ -1,6 +1,6 @@
 resource "openstack_lb_loadbalancer_v2" "admin_lb" {
   description        = "DC/OS Admin Router Loadbalancer"
-  vip_subnet_id      = "${var.network_id}"
+  vip_subnet_id      = "${var.subnet_id}"
   security_group_ids = "${var.security_groups}"
 }
 
