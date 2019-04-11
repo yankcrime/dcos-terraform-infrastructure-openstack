@@ -9,6 +9,10 @@
 #  cluster_name = "testing"
 #}
 
+module "dcos-security-groups" {
+  source = "./modules/security-groups"
+}
+
 module "dcos-network" {
   cluster_name = "testing"
   source = "./modules/network"
@@ -50,6 +54,7 @@ module "dcos-lb-masters" {
   dcos_masters_ip_addresses = "${module.dcos-master-instances.private_ips}"
   network_id = "${module.dcos-network.network_id}"
   subnet_id = "${module.dcos-network.subnet_id}"
+  security_group_id = ["${module.dcos-security-groups.security_group_id}"]
   source = "./modules/lb-masters"
 }
   

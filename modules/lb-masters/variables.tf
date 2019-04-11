@@ -1,7 +1,7 @@
-variable "security_groups" {
+variable "security_group_id" {
   description = "The security groups (firewall rules) that will be applied to this loadbalancer"
   type        = "list"
-  default     = ["default"]
+  default     = [""]
 }
 
 # TODO: This shouldn't live here
