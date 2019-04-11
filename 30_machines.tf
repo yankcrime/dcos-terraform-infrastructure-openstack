@@ -21,9 +21,18 @@ module "dcos-master-instances" {
   source = "./modules/masters"
   network_id = "${openstack_networking_network_v2.private.id}"
   cluster_name = "testing"
-  associate_public_ip_address = true
+  associate_public_ip_address = false
   floating_ip_pool = "internet"
   num_masters = "3"
+}
+
+module "dcos-public-agent-instances" {
+  source = "./modules/public-agents"
+  network_id = "${openstack_networking_network_v2.private.id}"
+  cluster_name = "testing"
+  associate_public_ip_address = true
+  floating_ip_pool = "internet"
+  num_public_agents = "2"
 }
   
 #resource "openstack_compute_instance_v2" "master" {
