@@ -10,7 +10,7 @@ variable "tags" {
 
 variable "flavor_name" {
   description = "Flavor (compute, memory, storage capacity)  of instance"
-  default     = "saveloy"
+  default     = "chipolata"
 }
 
 variable "image_name" {
