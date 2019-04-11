@@ -1,3 +1,10 @@
+/**
+ * OpenStack DC/OS Master Instances
+ * =================================
+ * This module creates typical DC/OS master instances
+ *
+ */
+
 module "dcos-master-instances" {
   source = "../../modules/instance"
   

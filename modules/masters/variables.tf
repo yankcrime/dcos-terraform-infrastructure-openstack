@@ -52,7 +52,7 @@ variable "num_masters" {
 
 variable "associate_public_ip_address" {
   description = "Associate a public IP address with the instances"
-  default     = true
+  default     = false
 }
 
 variable "floating_ip_pool" {
