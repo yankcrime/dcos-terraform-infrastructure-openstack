@@ -17,6 +17,14 @@ module "dcos-bootstrap-instance" {
   floating_ip_pool = "internet"
 }
 
+module "dcos-master-instances" {
+  source = "./modules/masters"
+  network_id = "${openstack_networking_network_v2.private.id}"
+  cluster_name = "testing"
+  associate_public_ip_address = true
+  floating_ip_pool = "internet"
+  num_masters = "3"
+}
   
 #resource "openstack_compute_instance_v2" "master" {
 #  count           = "${var.number_of_masters}"

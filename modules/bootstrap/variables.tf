@@ -47,7 +47,7 @@ variable "hostname_format" {
 
 variable "num_bootstrap" {
   description = "Specify the number of bootstrap instances.  This should be 1"
-  default     = 1
+  default     = "1"
 }
 
 variable "associate_public_ip_address" {

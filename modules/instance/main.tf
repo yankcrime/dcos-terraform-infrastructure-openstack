@@ -14,12 +14,12 @@ resource "openstack_compute_instance_v2" "instance" {
 }
 
 resource "openstack_networking_floatingip_v2" "instance_fip" {
-  count = "${var.associate_public_ip_address}"
+  count = "${var.associate_public_ip_address ? var.num : 0}"
   pool = "${var.floating_ip_pool}"
 }
 
 resource "openstack_compute_floatingip_associate_v2" "instance_fip" {
-  count = "${var.associate_public_ip_address}"
-  instance_id = "${openstack_compute_instance_v2.instance.id}"
-  floating_ip = "${openstack_networking_floatingip_v2.instance_fip.address}"
+  count = "${var.associate_public_ip_address ? var.num : 0}"
+  instance_id = "${openstack_compute_instance_v2.instance.*.id[count.index]}"
+  floating_ip = "${openstack_networking_floatingip_v2.instance_fip.*.address[count.index]}"
 }

@@ -1,5 +1,6 @@
 variable "num" {
   description = "How many instances should be created"
+  default = "1"
 }
 
 variable "cluster_name" {
