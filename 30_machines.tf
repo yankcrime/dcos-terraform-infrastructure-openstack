@@ -45,4 +45,11 @@ module "dcos-private-agent-instances" {
   cluster_name = "testing"
   num_private_agents = "5"
 }
+
+module "dcos-lb-masters" {
+  dcos_masters_ip_addresses = "${module.dcos-master-instances.private_ips}"
+  network_id = "${module.dcos-network.network_id}"
+  subnet_id = "${module.dcos-network.subnet_id}"
+  source = "./modules/lb-masters"
+}
   
