@@ -44,3 +44,4 @@ variable "external_network_id" {
 variable "floating_ip_pool" {
   description = "The name of the pool of addresses from which floating IPs can be allocated"
 }
+

@@ -52,6 +52,7 @@ module "dcos-lb-masters" {
   network_id = "${module.dcos-network.network_id}"
   subnet_id = "${module.dcos-network.subnet_id}"
   security_group_id = ["${module.dcos-security-groups.security_group_id}"]
+  num_masters = "${var.num_masters}"
 }
 
 module "dcos-lb-public-agents" {
@@ -61,6 +62,7 @@ module "dcos-lb-public-agents" {
   network_id = "${module.dcos-network.network_id}"
   subnet_id = "${module.dcos-network.subnet_id}"
   security_group_id = ["${module.dcos-security-groups.security_group_id}"]
+  num_public_agents = "${var.num_public_agents}"
 }
   
 module "dcos-lb-masters-internal" {
@@ -70,4 +72,5 @@ module "dcos-lb-masters-internal" {
   network_id = "${module.dcos-network.network_id}"
   subnet_id = "${module.dcos-network.subnet_id}"
   security_group_id = ["${module.dcos-security-groups.security_group_id}"]
+  num_masters = "${var.num_masters}"
 }

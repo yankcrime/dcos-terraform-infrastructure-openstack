@@ -4,9 +4,8 @@ variable "security_group_id" {
   default     = [""]
 }
 
-# TODO: This shouldn't live here
 variable "num_masters" {
-  default = "1"
+  default = ""
 }
 
 variable "network_id" {
