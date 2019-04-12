@@ -1,13 +1,3 @@
-#module "dcos-instance" {
-#  source          = "./modules/instance"
-#  image_name      = "CentOS 7.6"
-#  flavor_name     = "saveloy"
-#  key_pair        = "deadline"
-#  security_groups = ["dcos"]
-#  network_id      = "${openstack_networking_network_v2.private.id}"
-#  num_instances = "1"
-#  cluster_name = "testing"
-#}
 
 module "dcos-security-groups" {
   source = "./modules/security-groups"
@@ -16,43 +6,43 @@ module "dcos-security-groups" {
 module "dcos-network" {
   source = "./modules/network"
 
-  cluster_name = "testing"
-  external_network_id = "c72d2f60-9497-48b6-ab4d-005995aa4b21"
+  cluster_name = "${var.cluster_name}"
+  external_network_id = "${var.external_network_id}"
 }
 
 module "dcos-bootstrap-instance" {
   source = "./modules/bootstrap"
 
   network_id = "${module.dcos-network.network_id}"
-  cluster_name = "testing"
+  cluster_name = "${var.cluster_name}"
   associate_public_ip_address = true
-  floating_ip_pool = "internet"
+  floating_ip_pool = "${var.floating_ip_pool}"
 }
 
 module "dcos-master-instances" {
   source = "./modules/masters"
 
   network_id = "${module.dcos-network.network_id}"
-  cluster_name = "testing"
-  num_masters = "1"
+  cluster_name = "${var.cluster_name}"
+  num_masters = "${var.num_masters}"
 }
 
 module "dcos-public-agent-instances" {
   source = "./modules/public-agents"
 
   network_id = "${module.dcos-network.network_id}"
-  cluster_name = "testing"
+  cluster_name = "${var.cluster_name}"
   associate_public_ip_address = true
   floating_ip_pool = "internet"
-  num_public_agents = "2"
+  num_public_agents = "${var.num_public_agents}"
 }
 
 module "dcos-private-agent-instances" {
   source = "./modules/private-agents"
 
   network_id = "${module.dcos-network.network_id}"
-  cluster_name = "testing"
-  num_private_agents = "5"
+  cluster_name = "${var.cluster_name}"
+  num_private_agents = "${var.num_private_agents}"
 }
 
 module "dcos-lb-masters" {
@@ -73,3 +63,11 @@ module "dcos-lb-public-agents" {
   security_group_id = ["${module.dcos-security-groups.security_group_id}"]
 }
   
+module "dcos-lb-masters-internal" {
+  source = "./modules/lb-masters-internal"
+
+  dcos_masters_ip_addresses = "${module.dcos-master-instances.private_ips}"
+  network_id = "${module.dcos-network.network_id}"
+  subnet_id = "${module.dcos-network.subnet_id}"
+  security_group_id = ["${module.dcos-security-groups.security_group_id}"]
+}
