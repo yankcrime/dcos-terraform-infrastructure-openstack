@@ -5,7 +5,7 @@
  *
  */
 
-module "dcos-master-instances" {
+module "dcos-public-agent-instances" {
   source = "../../modules/instance"
   
   cluster_name                = "${var.cluster_name}"
