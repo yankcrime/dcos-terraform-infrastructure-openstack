@@ -30,5 +30,5 @@ output "masters.private_ips" {
 
 output "lb.public_agents" {
   description = "Public agents loadbalancer external IP address"
-  value       = "${module.dcos-lb-public-agents.lb_public_agents.public_ip}"
+  value       = "${module.dcos-lb.lb_public_agents.public_ip}"
 }
