@@ -58,7 +58,7 @@ module "dcos-lb-masters" {
 module "dcos-lb-public-agents" {
   source = "./modules/lb-public-agents"
 
-  dcos_public_agents_ip_addresses = "${module.dcos-public-agent-instances.private_ips}"
+  dcos_public_agents_ip_addresses = "${module.dcos-public-agent-instances.public_agents.private_ips}"
   network_id = "${module.dcos-network.network_id}"
   subnet_id = "${module.dcos-network.subnet_id}"
   security_group_id = ["${module.dcos-security-groups.security_group_id}"]
