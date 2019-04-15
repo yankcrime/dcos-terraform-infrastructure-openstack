@@ -25,8 +25,3 @@ resource "openstack_lb_member_v2" "masters_internal_lb_members" {
   pool_id       = "${openstack_lb_pool_v2.masters_internal_lb_pool.*.id[(count.index / length(var.num_masters))]}"
   subnet_id     = "${var.subnet_id}"
 }
-
-resource "openstack_networking_floatingip_v2" "masters_internal_lb_flip" {
-  pool    = "internet"
-  port_id = "${openstack_lb_loadbalancer_v2.masters_internal_lb.vip_port_id}"
-}
