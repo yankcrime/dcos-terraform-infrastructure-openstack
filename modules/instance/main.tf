@@ -1,7 +1,7 @@
 /**
  * OpenStack Instance
  * ==================
- * This is an module to creates a DC/OS OpenStack Instance.
+ * This is a module to create an DC/OS OpenStack Instance.
  */
 
 data "openstack_compute_availability_zones_v2" "region" {}

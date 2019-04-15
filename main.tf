@@ -50,7 +50,7 @@ module "dcos-lb-masters" {
   dcos_masters_ip_addresses = "${module.dcos-master-instances.private_ips}"
   network_id                = "${module.dcos-network.network_id}"
   subnet_id                 = "${module.dcos-network.subnet_id}"
-  security_group_id         = ["${module.dcos-security-groups.security_group_id}"]
+  security_group_id         = ["${module.dcos-security-groups.master_lb}"]
   num_masters               = "${var.num_masters}"
 }
 
@@ -60,7 +60,7 @@ module "dcos-lb-public-agents" {
   dcos_public_agents_ip_addresses = "${module.dcos-public-agent-instances.public_agents.private_ips}"
   network_id                      = "${module.dcos-network.network_id}"
   subnet_id                       = "${module.dcos-network.subnet_id}"
-  security_group_id               = ["${module.dcos-security-groups.security_group_id}"]
+  security_group_id               = ["${module.dcos-security-groups.public_agents}"]
   num_public_agents               = "${var.num_public_agents}"
 }
 
@@ -70,6 +70,6 @@ module "dcos-lb-masters-internal" {
   dcos_masters_ip_addresses = "${module.dcos-master-instances.private_ips}"
   network_id                = "${module.dcos-network.network_id}"
   subnet_id                 = "${module.dcos-network.subnet_id}"
-  security_group_id         = ["${module.dcos-security-groups.security_group_id}"]
+  security_group_id         = ["${module.dcos-security-groups.master_lb}"]
   num_masters               = "${var.num_masters}"
 }
