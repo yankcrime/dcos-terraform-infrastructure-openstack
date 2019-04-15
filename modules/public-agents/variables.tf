@@ -57,5 +57,5 @@ variable "associate_public_ip_address" {
 
 variable "floating_ip_pool" {
   description = "Subnet from which a floating IP address should be assigned"
-  default = ""
+  default     = ""
 }

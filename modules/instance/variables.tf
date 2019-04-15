@@ -1,6 +1,6 @@
 variable "num" {
   description = "How many instances should be created"
-  default = "1"
+  default     = "1"
 }
 
 variable "cluster_name" {
@@ -57,5 +57,5 @@ variable "associate_public_ip_address" {
 
 variable "floating_ip_pool" {
   description = "Subnet from which a floating IP address should be assigned"
-  default = ""
+  default     = ""
 }

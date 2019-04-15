@@ -10,16 +10,15 @@ variable "num_public_agents" {
 
 variable "network_id" {
   description = "The network ID in which the loadbalancer should sit"
-  default = ""
+  default     = ""
 }
 
 variable "subnet_id" {
   description = "The subnet ID in which lb members should reside"
-  default = ""
+  default     = ""
 }
 
 variable "dcos_public_agents_ip_addresses" {
-  type = "list"
+  type    = "list"
   default = [""]
 }
-

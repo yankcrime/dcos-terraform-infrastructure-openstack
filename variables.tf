@@ -1,26 +1,26 @@
 variable "ssh_key_pair" {
-  type = "string"
+  type    = "string"
   default = "deadline"
 }
 
 variable "num_masters" {
-  type = "string"
+  type    = "string"
   default = "3"
 }
 
 variable "num_public_agents" {
-  type = "string"
+  type    = "string"
   default = "1"
 }
 
 variable "num_private_agents" {
-  type = "string"
+  type    = "string"
   default = "3"
 }
 
 variable "internal_services" {
-  type = "list"
-  default = [ "80", "443","2181", "5050", "8080", "8181" ]
+  type    = "list"
+  default = ["80", "443", "2181", "5050", "8080", "8181"]
 }
 
 variable "dcos_instance_os" {
@@ -44,4 +44,3 @@ variable "external_network_id" {
 variable "floating_ip_pool" {
   description = "The name of the pool of addresses from which floating IPs can be allocated"
 }
-

@@ -7,7 +7,7 @@
 
 module "dcos-master-instances" {
   source = "../../modules/instance"
-  
+
   cluster_name                = "${var.cluster_name}"
   hostname_format             = "${var.hostname_format}"
   num                         = "${var.num_masters}"
@@ -19,5 +19,4 @@ module "dcos-master-instances" {
   floating_ip_pool            = "${var.floating_ip_pool}"
   security_groups             = "${var.security_groups}"
   key_pair                    = "${var.key_pair}"
-
 }
