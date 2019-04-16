@@ -8,4 +8,9 @@ num_public_agents = "1"
 num_private_agents = "5"
 num_masters = "3"
 
+bootstrap_image = "CentOS 7.6"
+master_image = "CentOS 7.6"
+public_agent_image = "CentOS 7.6"
+private_agent_image = "CentOS 7.6"
+
 ssh_public_key_file = "~/.ssh/id_rsa.pub"

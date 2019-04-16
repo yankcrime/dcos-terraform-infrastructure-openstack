@@ -12,7 +12,7 @@ module "dcos-bootstrap-instance" {
   hostname_format             = "${var.hostname_format}"
   num                         = "${var.num_bootstrap}"
   user_data                   = "${var.user_data}"
-  image_name                  = "${var.image_name}"
+  image                       = "${var.image}"
   flavor_name                 = "${var.flavor_name}"
   network_id                  = "${var.network_id}"
   associate_public_ip_address = "${var.associate_public_ip_address}"

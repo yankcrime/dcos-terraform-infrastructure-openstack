@@ -5,17 +5,17 @@ variable "ssh_key_pair" {
 
 variable "num_masters" {
   type    = "string"
-  default = "3"
+  default = ""
 }
 
 variable "num_public_agents" {
   type    = "string"
-  default = "1"
+  default = ""
 }
 
 variable "num_private_agents" {
   type    = "string"
-  default = "3"
+  default = ""
 }
 
 variable "internal_services" {
@@ -53,4 +53,40 @@ variable "ssh_public_key" {
 
 variable "ssh_public_key_file" {
   description = "Path to SSH public key. This is mandatory but can be set to an empty string if you want to use ssh_public_key with the key as string."
+}
+
+variable "bootstrap_image" {
+  description = "OS image to be used for bootstrap node"
+}
+
+variable "public_agent_image" {
+  description = "OS image to be used for public agent nodes"
+}
+
+variable "private_agent_image" {
+  description = "OS image to be used for private agent nodes"
+}
+
+variable "master_image" {
+  description = "OS image to be used for master nodes"
+}
+
+variable "bootstrap_associate_public_ip_address" {
+  description = "[BOOTSTRAP] Associate a public ip address with these instances"
+  default     = true
+}
+
+variable "masters_associate_public_ip_address" {
+  description = "[MASTERS] Associate a public ip address with these instances"
+  default     = false
+}
+
+variable "private_agents_associate_public_ip_address" {
+  description = "[PRIVATE AGENTS] Associate a public ip address with these instances"
+  default     = false
+}
+
+variable "public_agents_associate_public_ip_address" {
+  description = "[PUBLIC AGENTS] Associate a public ip address with these instances"
+  default     = false
 }

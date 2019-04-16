@@ -26,16 +26,19 @@ module "dcos-bootstrap-instance" {
   cluster_name                = "${var.cluster_name}"
   floating_ip_pool            = "${var.floating_ip_pool}"
   key_pair                    = "${var.cluster_name}-deployer-key"
-  associate_public_ip_address = true
+  associate_public_ip_address = "${var.bootstrap_associate_public_ip_address}"
+  image                       = "${var.bootstrap_image}"
 }
 
 module "dcos-master-instances" {
   source = "./modules/masters"
 
-  network_id   = "${module.dcos-network.network_id}"
-  cluster_name = "${var.cluster_name}"
-  num_masters  = "${var.num_masters}"
-  key_pair     = "${var.cluster_name}-deployer-key"
+  network_id                  = "${module.dcos-network.network_id}"
+  cluster_name                = "${var.cluster_name}"
+  num_masters                 = "${var.num_masters}"
+  key_pair                    = "${var.cluster_name}-deployer-key"
+  image                       = "${var.master_image}"
+  associate_public_ip_address = "${var.masters_associate_public_ip_address}"
 }
 
 module "dcos-public-agent-instances" {
@@ -43,19 +46,22 @@ module "dcos-public-agent-instances" {
 
   network_id                  = "${module.dcos-network.network_id}"
   cluster_name                = "${var.cluster_name}"
-  associate_public_ip_address = true
+  associate_public_ip_address = "${var.public_agents_associate_public_ip_address}"
   floating_ip_pool            = "internet"
   num_public_agents           = "${var.num_public_agents}"
   key_pair                    = "${var.cluster_name}-deployer-key"
+  image                       = "${var.public_agent_image}"
 }
 
 module "dcos-private-agent-instances" {
   source = "./modules/private-agents"
 
-  network_id         = "${module.dcos-network.network_id}"
-  cluster_name       = "${var.cluster_name}"
-  num_private_agents = "${var.num_private_agents}"
-  key_pair           = "${var.cluster_name}-deployer-key"
+  network_id                  = "${module.dcos-network.network_id}"
+  cluster_name                = "${var.cluster_name}"
+  num_private_agents          = "${var.num_private_agents}"
+  key_pair                    = "${var.cluster_name}-deployer-key"
+  image                       = "${var.private_agent_image}"
+  associate_public_ip_address = "${var.private_agents_associate_public_ip_address}"
 }
 
 module "dcos-lb" {
@@ -63,7 +69,7 @@ module "dcos-lb" {
 
   num_masters                        = "${var.num_masters}"
   num_public_agents                  = "${var.num_public_agents}"
-  dcos_public_agents_ip_addresses    = "${module.dcos-public-agent-instances.public_agents.private_ips}"
+  dcos_public_agents_ip_addresses    = "${module.dcos-public-agent-instances.private_ips}"
   dcos_masters_ip_addresses          = "${module.dcos-master-instances.private_ips}"
   masters_lb_security_group_id       = "${module.dcos-security-groups.master_lb}"
   public_agents_lb_security_group_id = "${module.dcos-security-groups.public_agents}"

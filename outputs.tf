@@ -28,7 +28,27 @@ output "masters.private_ips" {
   value       = ["${module.dcos-master-instances.private_ips}"]
 }
 
+output "private_agents.public_ips" {
+  description = "Private agents public IP addresses"
+  value = ["${module.dcos-private-agent-instances.private_ips}"]
+}
+
+output "public_agents.public_ips" {
+  description = "Public agents public IP addresses"
+  value = ["${module.dcos-public-agent-instances.public_ips}"]
+}
+
+output "public_agents.private_ips" {
+  description = "Public agents public IP addresses"
+  value = ["${module.dcos-public-agent-instances.private_ips}"]
+}
+
 output "lb.public_agents" {
   description = "Public agents loadbalancer external IP address"
   value       = "${module.dcos-lb.lb_public_agents.public_ip}"
+}
+
+output "lb.masters" {
+  description = "Public IP address of masters loadbalancer"
+  value = "${module.dcos-lb.lb_masters.public_ip}"
 }

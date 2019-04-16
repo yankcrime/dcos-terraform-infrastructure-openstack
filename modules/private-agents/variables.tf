@@ -13,9 +13,9 @@ variable "flavor_name" {
   default     = "saveloy"
 }
 
-variable "image_name" {
+variable "image" {
   description = "The operating system image to be used for the instance"
-  default     = "CentOS 7.6"
+  default     = ""
 }
 
 variable "network_id" {

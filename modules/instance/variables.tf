@@ -14,11 +14,11 @@ variable "tags" {
 }
 
 variable "flavor_name" {
-  description = "Flavor (compute, memory, storage capacity)  of instance"
+  description = "Flavor (compute, memory, storage capacity) of instance"
   default     = "saveloy"
 }
 
-variable "image_name" {
+variable "image" {
   description = "The operating system image to be used for the instance"
   default     = "CentOS 7.6"
 }
