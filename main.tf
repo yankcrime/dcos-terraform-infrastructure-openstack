@@ -24,8 +24,9 @@ module "dcos-bootstrap-instance" {
 
   network_id                  = "${module.dcos-network.network_id}"
   cluster_name                = "${var.cluster_name}"
-  associate_public_ip_address = true
   floating_ip_pool            = "${var.floating_ip_pool}"
+  key_pair                    = "${var.cluster_name}-deployer-key"
+  associate_public_ip_address = true
 }
 
 module "dcos-master-instances" {
@@ -34,6 +35,7 @@ module "dcos-master-instances" {
   network_id   = "${module.dcos-network.network_id}"
   cluster_name = "${var.cluster_name}"
   num_masters  = "${var.num_masters}"
+  key_pair     = "${var.cluster_name}-deployer-key"
 }
 
 module "dcos-public-agent-instances" {
@@ -44,6 +46,7 @@ module "dcos-public-agent-instances" {
   associate_public_ip_address = true
   floating_ip_pool            = "internet"
   num_public_agents           = "${var.num_public_agents}"
+  key_pair                    = "${var.cluster_name}-deployer-key"
 }
 
 module "dcos-private-agent-instances" {
@@ -52,6 +55,7 @@ module "dcos-private-agent-instances" {
   network_id         = "${module.dcos-network.network_id}"
   cluster_name       = "${var.cluster_name}"
   num_private_agents = "${var.num_private_agents}"
+  key_pair           = "${var.cluster_name}-deployer-key"
 }
 
 module "dcos-lb" {
