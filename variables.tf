@@ -44,3 +44,13 @@ variable "external_network_id" {
 variable "floating_ip_pool" {
   description = "The name of the pool of addresses from which floating IPs can be allocated"
 }
+
+variable "ssh_public_key" {
+  description = "SSH public key in authorized keys format (e.g. 'ssh-rsa ..') to be used with the instances. Make sure you added this key to your ssh-agent."
+
+  default = ""
+}
+
+variable "ssh_public_key_file" {
+  description = "Path to SSH public key. This is mandatory but can be set to an empty string if you want to use ssh_public_key with the key as string."
+}

@@ -1,3 +1,13 @@
+locals {
+  ssh_public_key_file = "${var.ssh_public_key_file == "" ? format("%s/main.tf", path.module) : var.ssh_public_key_file}"
+  ssh_key_content     = "${var.ssh_public_key_file == "" ? var.ssh_public_key : file(local.ssh_public_key_file)}"
+}
+
+resource "openstack_compute_keypair_v2" "deployer" {
+  name       = "${var.cluster_name}-deployer-key"
+  public_key = "${local.ssh_key_content}"
+}
+
 module "dcos-security-groups" {
   source = "./modules/security-groups"
 }
