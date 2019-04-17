@@ -30,6 +30,11 @@ output "masters.private_ips" {
 
 output "private_agents.public_ips" {
   description = "Private agents public IP addresses"
+  value = ["${module.dcos-private-agent-instances.public_ips}"]
+}
+
+output "private_agents.private_ips" {
+  description = "Private agents public IP addresses"
   value = ["${module.dcos-private-agent-instances.private_ips}"]
 }
 
