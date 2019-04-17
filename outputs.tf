@@ -52,3 +52,8 @@ output "lb.masters" {
   description = "Public IP address of masters loadbalancer"
   value = "${module.dcos-lb.lb_masters.public_ip}"
 }
+
+output "lb.masters.private_ip" {
+  description = "Public IP address of masters loadbalancer"
+  value = "${module.dcos-lb.lb_masters.private_ip}"
+}
