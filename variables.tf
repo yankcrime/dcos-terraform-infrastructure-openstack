@@ -72,21 +72,26 @@ variable "master_image" {
 }
 
 variable "bootstrap_associate_public_ip_address" {
-  description = "[BOOTSTRAP] Associate a public ip address with these instances"
+  description = "Associate a public ip address with boostrap instances"
   default     = true
 }
 
 variable "masters_associate_public_ip_address" {
-  description = "[MASTERS] Associate a public ip address with these instances"
+  description = "Associate a public ip address with master instances"
   default     = false
 }
 
 variable "private_agents_associate_public_ip_address" {
-  description = "[PRIVATE AGENTS] Associate a public ip address with these instances"
+  description = "Associate a public ip address with private agent instances"
   default     = false
 }
 
 variable "public_agents_associate_public_ip_address" {
-  description = "[PUBLIC AGENTS] Associate a public ip address with these instances"
+  description = "Associate a public ip address with public agent instances"
   default     = false
+}
+
+variable "user_data" {
+  description = "User data to be used on this instance (cloud-init)"
+  default     = ""
 }

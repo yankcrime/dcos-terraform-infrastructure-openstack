@@ -47,7 +47,7 @@ variable "hostname_format" {
 
 variable "num_masters" {
   description = "Specify the number of master instances.  This should be at least 1"
-  default     = 1
+  default     = "1"
 }
 
 variable "associate_public_ip_address" {
