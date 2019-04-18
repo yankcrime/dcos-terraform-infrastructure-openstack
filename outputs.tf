@@ -30,22 +30,22 @@ output "masters.private_ips" {
 
 output "private_agents.public_ips" {
   description = "Private agents public IP addresses"
-  value = ["${module.dcos-private-agent-instances.public_ips}"]
+  value       = ["${module.dcos-private-agent-instances.public_ips}"]
 }
 
 output "private_agents.private_ips" {
   description = "Private agents public IP addresses"
-  value = ["${module.dcos-private-agent-instances.private_ips}"]
+  value       = ["${module.dcos-private-agent-instances.private_ips}"]
 }
 
 output "public_agents.public_ips" {
   description = "Public agents public IP addresses"
-  value = ["${module.dcos-public-agent-instances.public_ips}"]
+  value       = ["${module.dcos-public-agent-instances.public_ips}"]
 }
 
 output "public_agents.private_ips" {
   description = "Public agents public IP addresses"
-  value = ["${module.dcos-public-agent-instances.private_ips}"]
+  value       = ["${module.dcos-public-agent-instances.private_ips}"]
 }
 
 output "lb.public_agents" {
@@ -55,10 +55,10 @@ output "lb.public_agents" {
 
 output "lb.masters" {
   description = "Public IP address of masters loadbalancer"
-  value = "${module.dcos-lb.lb_masters.public_ip}"
+  value       = "${module.dcos-lb.lb_masters.public_ip}"
 }
 
 output "lb.masters.private_ip" {
   description = "Public IP address of masters loadbalancer"
-  value = "${module.dcos-lb.lb_masters.private_ip}"
+  value       = "${module.dcos-lb.lb_masters.private_ip}"
 }
