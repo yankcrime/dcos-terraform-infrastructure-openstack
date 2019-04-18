@@ -1,3 +1,4 @@
-# DC/OS Lab Environment
+# DC/OS on OpenStack
 
-http://52.88.186.168/dcos-fundamentals/intro.html
+This set of Terraform configuration aims to deploy virtual infrastructure on top of OpenStack in a way which is suitable for installing DC/OS.
+
