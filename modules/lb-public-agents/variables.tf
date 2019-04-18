@@ -1,7 +1,7 @@
 variable "security_group_id" {
-  description = "The security groups (firewall rules) that will be applied to this loadbalancer"
-  type        = "list"
-  default     = [""]
+  description = "The security group (firewall rules) that will be applied to this loadbalancer"
+  type        = "string"
+  default     = ""
 }
 
 variable "num_public_agents" {

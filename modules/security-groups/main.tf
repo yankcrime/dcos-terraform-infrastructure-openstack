@@ -2,44 +2,53 @@ locals {
   public_agents_additional_ports = "${concat(list("80","443"),var.public_agents_additional_ports)}"
 }
 
-resource "openstack_compute_secgroup_v2" "internal" {
+resource "openstack_networking_secgroup_v2" "internal" {
   name        = "dcos-${var.cluster_name}-internal-firewall"
   description = "Allow all internal traffic"
-
-  rule {
-    from_port   = 1
-    to_port     = 65535
-    ip_protocol = "tcp"
-    cidr        = "0.0.0.0/0"
-  }
-
-  rule {
-    from_port   = 1
-    to_port     = 65535
-    ip_protocol = "udp"
-    cidr        = "0.0.0.0/0"
-  }
-
-  rule {
-    from_port   = -1
-    to_port     = -1
-    ip_protocol = "icmp"
-    cidr        = "0.0.0.0/0"
-  }
 }
 
-resource "openstack_compute_secgroup_v2" "public_agents" {
+resource "openstack_networking_secgroup_rule_v2" "internal-tcp" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = "1"
+  port_range_max    = "65535"
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = "${openstack_networking_secgroup_v2.internal.id}"
+}
+
+resource "openstack_networking_secgroup_rule_v2" "internal-udp" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "udp"
+  port_range_min    = "1"
+  port_range_max    = "65535"
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = "${openstack_networking_secgroup_v2.internal.id}"
+}
+
+resource "openstack_networking_secgroup_rule_v2" "internal-icmp" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "icmp"
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = "${openstack_networking_secgroup_v2.internal.id}"
+}
+
+resource "openstack_networking_secgroup_v2" "public_agents" {
   name        = "dcos-${var.cluster_name}-public-agents-lb-firewall"
   description = "Allow incoming traffic on Public Agents load balancer"
+}
 
-  count = "${length(local.public_agents_additional_ports)}"
-
-  rule {
-    ip_protocol = "tcp"
-    from_port   = "${element(local.public_agents_additional_ports, count.index)}"
-    to_port     = "${element(local.public_agents_additional_ports, count.index)}"
-    cidr        = "${var.public_agents_access_ips}"
-  }
+resource "openstack_networking_secgroup_rule_v2" "public_agents" {
+  count             = "${length(local.public_agents_additional_ports)}"
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = "${element(local.public_agents_additional_ports, count.index)}"
+  port_range_max    = "${element(local.public_agents_additional_ports, count.index)}"
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = "${openstack_networking_secgroup_v2.public_agents.id}"
 }
 
 resource "openstack_compute_secgroup_v2" "master_lb" {

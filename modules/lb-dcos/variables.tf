@@ -39,8 +39,8 @@ variable "masters_lb_security_group_id" {
 }
 
 variable "public_agents_lb_security_group_id" {
-  type    = "list"
-  default = [""]
+  type    = "string"
+  default = ""
 }
 
 variable "public_agents_additional_ports" {

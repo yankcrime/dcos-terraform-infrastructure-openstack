@@ -32,7 +32,7 @@ module "dcos-lb-masters-internal" {
   dcos_masters_ip_addresses = "${var.dcos_masters_ip_addresses}"
   network_id                = "${var.network_id}"
   subnet_id                 = "${var.subnet_id}"
-  security_group_id         = ["${var.masters_lb_security_group_id}"]
+  security_group_id         = "${var.masters_lb_security_group_id}"
   num_masters               = "${var.num_masters}"
 }
 
@@ -42,7 +42,7 @@ module "dcos-lb-public-agents" {
   dcos_public_agents_ip_addresses = "${var.dcos_public_agents_ip_addresses}"
   network_id                      = "${var.network_id}"
   subnet_id                       = "${var.subnet_id}"
-  security_group_id               = ["${var.public_agents_lb_security_group_id}"]
+  security_group_id               = "${var.public_agents_lb_security_group_id}"
   num_public_agents               = "${var.num_public_agents}"
   public_agents_additional_ports  = ["${var.public_agents_additional_ports}"]
 }

@@ -9,7 +9,8 @@ resource "openstack_compute_keypair_v2" "deployer" {
 }
 
 module "dcos-security-groups" {
-  source = "./modules/security-groups"
+  source                         = "./modules/security-groups"
+  public_agents_additional_ports = "${var.public_agents_additional_ports}"
 }
 
 module "dcos-network" {
@@ -60,7 +61,7 @@ module "dcos-public-agent-instances" {
   key_pair                    = "${var.cluster_name}-deployer-key"
   image                       = "${var.public_agent_image}"
   user_data                   = "${var.user_data}"
-  security_groups             = ["${concat(list(module.dcos-security-groups.internal, module.dcos-security-groups.admin), module.dcos-security-groups.public_agents)}"]
+  security_groups             = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin, module.dcos-security-groups.public_agents)}"]
   flavor_name                 = "${var.public_agents_flavor_name}"
 }
 

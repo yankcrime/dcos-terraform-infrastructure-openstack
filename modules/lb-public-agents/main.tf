@@ -5,7 +5,7 @@ locals {
 resource "openstack_lb_loadbalancer_v2" "public_agents_lb" {
   description        = "DC/OS Public Agents Loadbalancer"
   vip_subnet_id      = "${var.subnet_id}"
-  security_group_ids = ["${var.security_group_id}"]
+  security_group_ids = ["${list(var.security_group_id)}"]
 }
 
 resource "openstack_lb_listener_v2" "public_agents_lb_listener" {
