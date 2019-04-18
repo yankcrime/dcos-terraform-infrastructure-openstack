@@ -25,7 +25,7 @@ variable "internal_services" {
 
 variable "dcos_instance_os" {
   description = "Operating system to use."
-  default     = "CentOS 7.6"
+  default     = "CentOS 7.6-docker"
 }
 
 variable "subnet_range" {
