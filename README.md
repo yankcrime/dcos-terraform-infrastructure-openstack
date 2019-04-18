@@ -1,4 +1,4 @@
 # DC/OS on OpenStack
 
-This set of Terraform configuration aims to deploy virtual infrastructure on top of OpenStack in a way which is suitable for installing DC/OS.
+Terraform code for creating virtual infrastructure on OpenStack suitable for deploying DC/OS.  Go [here](https://github.com/yankcrime/dcos-terraform-openstack) for instructions on getting started.
 
