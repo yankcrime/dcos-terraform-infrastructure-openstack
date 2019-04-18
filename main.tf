@@ -88,6 +88,7 @@ module "dcos-lb" {
   dcos_masters_ip_addresses          = "${module.dcos-master-instances.private_ips}"
   masters_lb_security_group_id       = "${module.dcos-security-groups.master_lb}"
   public_agents_lb_security_group_id = "${module.dcos-security-groups.public_agents}"
+  public_agents_additional_ports     = "${var.public_agents_additional_ports}"
   network_id                         = "${module.dcos-network.network_id}"
   subnet_id                          = "${module.dcos-network.subnet_id}"
 }

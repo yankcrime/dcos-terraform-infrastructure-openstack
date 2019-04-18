@@ -44,5 +44,5 @@ module "dcos-lb-public-agents" {
   subnet_id                       = "${var.subnet_id}"
   security_group_id               = ["${var.public_agents_lb_security_group_id}"]
   num_public_agents               = "${var.num_public_agents}"
+  public_agents_additional_ports  = ["${var.public_agents_additional_ports}"]
 }
-

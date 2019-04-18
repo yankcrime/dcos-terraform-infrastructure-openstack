@@ -22,3 +22,13 @@ variable "dcos_public_agents_ip_addresses" {
   type    = "list"
   default = [""]
 }
+
+variable "public_agents_default_ports" {
+  type    = "list"
+  default = ["80", "443"]
+}
+
+variable "public_agents_additional_ports" {
+  description = "List of additional ports allowed for public access on public agents"
+  default     = []
+}

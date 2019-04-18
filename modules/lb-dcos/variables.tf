@@ -34,11 +34,16 @@ variable "dcos_public_agents_ip_addresses" {
 }
 
 variable "masters_lb_security_group_id" {
-  type = "list"
+  type    = "list"
   default = [""]
 }
 
 variable "public_agents_lb_security_group_id" {
-  type = "list"
+  type    = "list"
   default = [""]
+}
+
+variable "public_agents_additional_ports" {
+  description = "List of additional ports allowed for public access on public agents"
+  default     = []
 }
