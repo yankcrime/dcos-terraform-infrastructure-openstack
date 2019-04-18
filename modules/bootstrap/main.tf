@@ -17,6 +17,6 @@ module "dcos-bootstrap-instance" {
   network_id                  = "${var.network_id}"
   associate_public_ip_address = "${var.associate_public_ip_address}"
   floating_ip_pool            = "${var.floating_ip_pool}"
-  security_groups             = "${var.security_groups}"
+  security_groups             = ["${var.security_groups}"]
   key_pair                    = "${var.key_pair}"
 }

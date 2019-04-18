@@ -60,3 +60,43 @@ resource "openstack_compute_secgroup_v2" "master_lb" {
     cidr        = "${var.admin_ips}"
   }
 }
+
+resource "openstack_compute_secgroup_v2" "admin" {
+  name        = "dcos-${var.cluster_name}-admin-lb-firewall"
+  description = "Allow incoming traffic from a list of admin IP addresses"
+
+  rule {
+    from_port   = 22
+    to_port     = 22
+    ip_protocol = "tcp"
+    cidr        = "${var.admin_ips}"
+  }
+
+  rule {
+    from_port   = 80
+    to_port     = 80
+    ip_protocol = "tcp"
+    cidr        = "${var.admin_ips}"
+  }
+
+  rule {
+    from_port   = 443
+    to_port     = 443
+    ip_protocol = "tcp"
+    cidr        = "${var.admin_ips}"
+  }
+
+  rule {
+    from_port   = 8181
+    to_port     = 8181
+    ip_protocol = "tcp"
+    cidr        = "${var.admin_ips}"
+  }
+
+  rule {
+    from_port   = 9090
+    to_port     = 9090
+    ip_protocol = "tcp"
+    cidr        = "${var.admin_ips}"
+  }
+}

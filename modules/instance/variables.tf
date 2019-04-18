@@ -7,6 +7,7 @@ variable "cluster_name" {
   description = "Name of the DC/OS cluster"
 }
 
+# TODO: This needs implementing
 variable "tags" {
   description = "Add custom tags to all resources"
   type        = "map"

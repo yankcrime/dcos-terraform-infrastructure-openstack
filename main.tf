@@ -29,6 +29,7 @@ module "dcos-bootstrap-instance" {
   associate_public_ip_address = "${var.bootstrap_associate_public_ip_address}"
   image                       = "${var.bootstrap_image}"
   user_data                   = "${var.user_data}"
+  security_groups             = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
 }
 
 module "dcos-master-instances" {
@@ -42,6 +43,7 @@ module "dcos-master-instances" {
   associate_public_ip_address = "${var.masters_associate_public_ip_address}"
   floating_ip_pool            = "${var.floating_ip_pool}"
   user_data                   = "${var.user_data}"
+  security_groups             = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
 }
 
 module "dcos-public-agent-instances" {
@@ -56,6 +58,7 @@ module "dcos-public-agent-instances" {
   key_pair                    = "${var.cluster_name}-deployer-key"
   image                       = "${var.public_agent_image}"
   user_data                   = "${var.user_data}"
+  security_groups             = ["${concat(list(module.dcos-security-groups.internal, module.dcos-security-groups.admin), module.dcos-security-groups.public_agents)}"]
 }
 
 module "dcos-private-agent-instances" {
@@ -69,6 +72,7 @@ module "dcos-private-agent-instances" {
   associate_public_ip_address = "${var.private_agents_associate_public_ip_address}"
   floating_ip_pool            = "${var.floating_ip_pool}"
   user_data                   = "${var.user_data}"
+  security_groups             = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
 }
 
 module "dcos-lb" {
