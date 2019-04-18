@@ -95,3 +95,23 @@ variable "user_data" {
   description = "User data to be used on this instance (cloud-init)"
   default     = ""
 }
+
+variable "bootstrap_flavor_name" {
+  description = "The name of the flavor used for the bootstrap instance"
+  default = ""
+}
+
+variable "masters_flavor_name" {
+  description = "The name of the flavor used for the bootstrap instance"
+  default = ""
+}
+
+variable "public_agents_flavor_name" {
+  description = "The name of the flavor used for the bootstrap instance"
+  default = ""
+}
+
+variable "private_agents_flavor_name" {
+  description = "The name of the flavor used for the bootstrap instance"
+  default = ""
+}

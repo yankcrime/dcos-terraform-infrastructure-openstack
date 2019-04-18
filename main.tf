@@ -30,6 +30,7 @@ module "dcos-bootstrap-instance" {
   image                       = "${var.bootstrap_image}"
   user_data                   = "${var.user_data}"
   security_groups             = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  flavor_name                 = "${var.bootstrap_flavor_name}"
 }
 
 module "dcos-master-instances" {
@@ -44,6 +45,7 @@ module "dcos-master-instances" {
   floating_ip_pool            = "${var.floating_ip_pool}"
   user_data                   = "${var.user_data}"
   security_groups             = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  flavor_name                 = "${var.masters_flavor_name}"
 }
 
 module "dcos-public-agent-instances" {
@@ -59,6 +61,7 @@ module "dcos-public-agent-instances" {
   image                       = "${var.public_agent_image}"
   user_data                   = "${var.user_data}"
   security_groups             = ["${concat(list(module.dcos-security-groups.internal, module.dcos-security-groups.admin), module.dcos-security-groups.public_agents)}"]
+  flavor_name                 = "${var.public_agents_flavor_name}"
 }
 
 module "dcos-private-agent-instances" {
@@ -73,6 +76,7 @@ module "dcos-private-agent-instances" {
   floating_ip_pool            = "${var.floating_ip_pool}"
   user_data                   = "${var.user_data}"
   security_groups             = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  flavor_name                 = "${var.private_agents_flavor_name}"
 }
 
 module "dcos-lb" {
