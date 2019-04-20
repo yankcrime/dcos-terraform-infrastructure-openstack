@@ -78,12 +78,12 @@ variable "bootstrap_associate_public_ip_address" {
 
 variable "masters_associate_public_ip_address" {
   description = "Associate a public ip address with master instances"
-  default     = true
+  default     = false
 }
 
 variable "private_agents_associate_public_ip_address" {
   description = "Associate a public ip address with private agent instances"
-  default     = true
+  default     = false
 }
 
 variable "public_agents_associate_public_ip_address" {
