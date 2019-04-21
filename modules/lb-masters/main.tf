@@ -10,14 +10,14 @@ resource "openstack_lb_loadbalancer_v2" "masters_lb" {
 
 resource "openstack_lb_listener_v2" "masters_lb_listener" {
   count           = "${length(local.services)}"
-  protocol        = "HTTP"
+  protocol        = "TCP"
   protocol_port   = "${element(local.services, count.index)}"
   loadbalancer_id = "${openstack_lb_loadbalancer_v2.masters_lb.id}"
 }
 
 resource "openstack_lb_pool_v2" "masters_lb_pool" {
   count       = "${length(local.services)}"
-  protocol    = "HTTP"
+  protocol    = "TCP"
   lb_method   = "ROUND_ROBIN"
   listener_id = "${openstack_lb_listener_v2.masters_lb_listener.*.id[count.index]}"
 }
