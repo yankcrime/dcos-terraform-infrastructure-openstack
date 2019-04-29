@@ -18,6 +18,11 @@ variable "subnet_id" {
   default     = ""
 }
 
+variable "floating_ip_pool" {
+  description = "The pool from which floating IP addresses should be allocated"
+  default     = ""
+}
+
 variable "dcos_masters_ip_addresses" {
   type    = "list"
   default = [""]
@@ -27,4 +32,3 @@ variable "internal_services" {
   type    = "list"
   default = ["80", "443", "2181", "5050", "8080", "8181"]
 }
-

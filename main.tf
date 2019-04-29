@@ -56,7 +56,6 @@ module "dcos-public-agent-instances" {
   cluster_name                = "${var.cluster_name}"
   associate_public_ip_address = "${var.public_agents_associate_public_ip_address}"
   floating_ip_pool            = "${var.floating_ip_pool}"
-  floating_ip_pool            = "${var.floating_ip_pool}"
   num_public_agents           = "${var.num_public_agents}"
   key_pair                    = "${var.cluster_name}-deployer-key"
   image                       = "${var.public_agent_image}"
@@ -92,4 +91,5 @@ module "dcos-lb" {
   public_agents_additional_ports     = "${var.public_agents_additional_ports}"
   network_id                         = "${module.dcos-network.network_id}"
   subnet_id                          = "${module.dcos-network.subnet_id}"
+  floating_ip_pool                   = "${var.floating_ip_pool}"
 }

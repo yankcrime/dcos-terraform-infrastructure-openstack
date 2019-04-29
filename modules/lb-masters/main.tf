@@ -31,6 +31,6 @@ resource "openstack_lb_member_v2" "masters_lb_members" {
 }
 
 resource "openstack_networking_floatingip_v2" "masters_lb_flip" {
-  pool    = "internet"
+  pool    = "${var.floating_ip_pool}"
   port_id = "${openstack_lb_loadbalancer_v2.masters_lb.vip_port_id}"
 }

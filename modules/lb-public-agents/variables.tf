@@ -18,6 +18,11 @@ variable "subnet_id" {
   default     = ""
 }
 
+variable "floating_ip_pool" {
+  description = "The pool from which floating IP addresses should be allocated"
+  default     = ""
+}
+
 variable "dcos_public_agents_ip_addresses" {
   type    = "list"
   default = [""]

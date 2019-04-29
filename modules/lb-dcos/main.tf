@@ -24,6 +24,7 @@ module "dcos-lb-masters" {
   subnet_id                 = "${var.subnet_id}"
   security_group_id         = ["${var.masters_lb_security_group_id}"]
   num_masters               = "${var.num_masters}"
+  floating_ip_pool          = "${var.floating_ip_pool}"
 }
 
 module "dcos-lb-masters-internal" {
@@ -45,4 +46,5 @@ module "dcos-lb-public-agents" {
   security_group_id               = "${var.public_agents_lb_security_group_id}"
   num_public_agents               = "${var.num_public_agents}"
   public_agents_additional_ports  = ["${var.public_agents_additional_ports}"]
+  floating_ip_pool                = "${var.floating_ip_pool}"
 }
