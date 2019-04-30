@@ -30,7 +30,7 @@ resource "openstack_lb_member_v2" "public_agents_lb_members" {
   subnet_id     = "${var.subnet_id}"
 }
 
-resource "openstack_networking_floatingip_v2" "public_agents_lb_flip" {
+resource "openstack_networking_floatingip_v2" "public_agents_lb_fip" {
   pool    = "${var.floating_ip_pool}"
   port_id = "${openstack_lb_loadbalancer_v2.public_agents_lb.vip_port_id}"
 }
